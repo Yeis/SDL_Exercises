@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\include;C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -121,6 +121,7 @@
     <ClCompile Include="01_hello_SDL.cpp" />
     <ClCompile Include="Exercise02.cpp" />
     <ClCompile Include="Exercise03.cpp" />
+    <ClCompile Include="Exercise05.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -130,6 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp" />
+    <Image Include="Images\down.bmp" />
+    <Image Include="Images\left.bmp" />
+    <Image Include="Images\right.bmp" />
+    <Image Include="Images\up.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

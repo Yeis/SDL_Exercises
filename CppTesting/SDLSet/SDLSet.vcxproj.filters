@@ -24,6 +24,9 @@
     <ClCompile Include="Exercise03.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Exercise05.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -37,6 +40,18 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="bitmap1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\down.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\left.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\right.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\up.bmp">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

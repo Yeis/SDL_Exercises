@@ -4,7 +4,7 @@
 ////Using SDL and standard IO
 //#include <SDL.h>
 //#include <stdio.h>
-//
+//#include <string>
 ////Screen dimension constants
 //const int SCREEN_WIDTH = 640;
 //const int SCREEN_HEIGHT = 480;
@@ -24,13 +24,43 @@
 ////The surface contained by the window
 //SDL_Surface* gScreenSurface = NULL;
 //
-////The image we will load and show on the screen
-//SDL_Surface* gHelloWorld = NULL;
 //
-//// SDL Event Handler 
-//SDL_Event e;
 //
-//bool quit = false;
+//
+////EXERCICE 04 KEY PRESS 
+//
+//SDL_Surface* loadSurface(std::string path);
+//
+//
+//
+////Current displayed image
+//SDL_Surface* gStretchedSurface = NULL;
+//
+//
+//SDL_Surface* loadSurface(std::string path)
+//{
+//	//load image at specified path 
+//	SDL_Surface* optimizedSurface = NULL;
+//
+//	SDL_Surface* loadedSurface = SDL_LoadBMP(path.c_str());
+//	if (loadedSurface == NULL)
+//	{
+//		printf("Unable to load the image! %s \n", SDL_GetError());
+//	}
+//	else 
+//	{
+//		//convert surface to screen format 
+//		optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, NULL);
+//		if (optimizedSurface == NULL)
+//		{
+//			printf("Unable to optimized image! %s  \n",SDL_GetError());
+//		}
+//		//get rid of oldsurface 
+//		SDL_FreeSurface(loadedSurface);
+//
+//	}
+//	return optimizedSurface;
+//}
 //
 //
 //
@@ -69,11 +99,11 @@
 //	//Loading success flag
 //	bool success = true;
 //
-//	//Load splash image  C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\Images
-//	gHelloWorld = SDL_LoadBMP("c://Users/Yeis/Documents/SDL_Exercises/CppTesting/SDLSet/Images/hello_world.bmp");
-//	if (gHelloWorld == NULL)
+//	//Load stretching surface
+//	gStretchedSurface = loadSurface("c://Users/Yeis/Documents/SDL_Exercises/CppTesting/SDLSet/Images/stretch.bmp");
+//	if (gStretchedSurface == NULL)
 //	{
-//		printf("Unable to load image %s! SDL Error: %s\n", "hello_world.bmp", SDL_GetError());
+//		printf("Failed to load stretching image!\n");
 //		success = false;
 //	}
 //
@@ -82,9 +112,13 @@
 //
 //void close()
 //{
+//
+//
+//
+//
 //	//Deallocate surface
-//	SDL_FreeSurface(gHelloWorld);
-//	gHelloWorld = NULL;
+//	SDL_FreeSurface(gStretchedSurface);
+//	gStretchedSurface = NULL;
 //
 //	//Destroy window
 //	SDL_DestroyWindow(gWindow);
@@ -97,12 +131,12 @@
 //int main(int argc, char* args[])
 //{
 //
-//	
+//
 //
 //	//Start up SDL and create window
 //	if (!init())
 //	{
-//		
+//
 //		printf("Failed to initialize!\n");
 //	}
 //	else
@@ -110,19 +144,47 @@
 //		//Load media
 //		if (!loadMedia())
 //		{
-//		
+//
 //			printf("Failed to load media!\n");
 //		}
 //		else
 //		{
-//			//Apply the image
-//			SDL_BlitSurface(gHelloWorld, NULL, gScreenSurface, NULL);
+//			// MAIN PART OF EXERCISE 03 
+//			// SDL Event Handler 
+//			SDL_Event e;
 //
-//			//Update the surface
-//			SDL_UpdateWindowSurface(gWindow);
+//			bool quit = false;
+//
+//		
+//
+//
+//			while (!quit)
+//			{
+//				while (SDL_PollEvent(&e) != 0)
+//				{
+//					//user press quit
+//					if (e.type == SDL_QUIT)
+//					{
+//						quit = true;
+//					}
+//				
+//					SDL_Rect stretchRect;
+//					stretchRect.x = 0;
+//					stretchRect.y = 0;
+//					stretchRect.w = SCREEN_WIDTH;
+//					stretchRect.h = SCREEN_HEIGHT;
+//					//Apply the image
+//					SDL_BlitSurface(gStretchedSurface, NULL, gScreenSurface, NULL);
+//
+//					//Update the surface
+//					SDL_UpdateWindowSurface(gWindow);
+//
+//				}
+//			}
+//
+//
 //
 //			//Wait two seconds
-//			SDL_Delay(2000);
 //		}
 //	}
 //
