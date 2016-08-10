@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\include;C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

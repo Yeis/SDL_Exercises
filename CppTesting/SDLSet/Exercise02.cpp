@@ -96,10 +96,7 @@ void close()
 
 int main(int argc, char* args[])
 {
-	while (!quit)
-	{
 
-	}
 	
 
 	//Start up SDL and create window
