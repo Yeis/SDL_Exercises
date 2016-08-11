@@ -27,6 +27,15 @@
     <ClCompile Include="Exercise05.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Exercies06.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercise07.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercise08.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -52,6 +61,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Images\up.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\loaded.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Images\texture.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

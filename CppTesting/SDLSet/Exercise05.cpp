@@ -99,8 +99,8 @@
 //	//Loading success flag
 //	bool success = true;
 //
-//	//Load stretching surface
-//	gStretchedSurface = loadSurface("c://Users/Yeis/Documents/SDL_Exercises/CppTesting/SDLSet/Images/stretch.bmp");
+//	//Load stretching surface  C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\Images
+//	gStretchedSurface = loadSurface("c://Users/Admin/Documents/SDL/CppTesting/SDLSet/Images/stretch.bmp");
 //	if (gStretchedSurface == NULL)
 //	{
 //		printf("Failed to load stretching image!\n");
@@ -174,8 +174,8 @@
 //					stretchRect.w = SCREEN_WIDTH;
 //					stretchRect.h = SCREEN_HEIGHT;
 //					//Apply the image
-//					SDL_BlitSurface(gStretchedSurface, NULL, gScreenSurface, NULL);
-//
+//					//SDL_BlitSurface(gStretchedSurface, NULL, gScreenSurface, NULL);
+//					SDL_BlitScaled(gStretchedSurface, NULL , gScreenSurface , &stretchRect);
 //					//Update the surface
 //					SDL_UpdateWindowSurface(gWindow);
 //

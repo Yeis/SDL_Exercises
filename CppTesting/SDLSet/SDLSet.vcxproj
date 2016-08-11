@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\lib\win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,7 +80,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -119,9 +119,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="01_hello_SDL.cpp" />
+    <ClCompile Include="Exercies06.cpp" />
     <ClCompile Include="Exercise02.cpp" />
     <ClCompile Include="Exercise03.cpp" />
     <ClCompile Include="Exercise05.cpp" />
+    <ClCompile Include="Exercise07.cpp" />
+    <ClCompile Include="Exercise08.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
@@ -133,7 +136,9 @@
     <Image Include="bitmap1.bmp" />
     <Image Include="Images\down.bmp" />
     <Image Include="Images\left.bmp" />
+    <Image Include="Images\loaded.png" />
     <Image Include="Images\right.bmp" />
+    <Image Include="Images\texture.png" />
     <Image Include="Images\up.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
