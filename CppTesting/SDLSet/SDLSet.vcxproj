@@ -125,6 +125,13 @@
     <ClCompile Include="Exercise05.cpp" />
     <ClCompile Include="Exercise07.cpp" />
     <ClCompile Include="Exercise08.cpp" />
+    <ClCompile Include="Exercise09.cpp" />
+    <ClCompile Include="Exercise10.cpp" />
+    <ClCompile Include="Exercise11.cpp" />
+    <ClCompile Include="Exercise12.cpp" />
+    <ClCompile Include="Exercise13.cpp" />
+    <ClCompile Include="Exercise14.cpp" />
+    <ClCompile Include="Exercise15.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
