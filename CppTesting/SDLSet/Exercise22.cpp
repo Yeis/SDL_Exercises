@@ -2,6 +2,9 @@
 //#include <SDL_image.h>
 //#include <stdio.h>
 //#include <string>
+//#include <SDL_ttf.h>
+//#include  <cmath>
+//#include <sstream>
 //
 ////constatnts
 //const int SCREEN_WIDTH = 640;
@@ -25,6 +28,9 @@
 //	//Deallocates Memory
 //	~LTexture();
 //
+//	//Function of exercise 16 create image from font string
+//	bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
+//
 //	//load image at specific path
 //	bool loadFromFile(std::string path);
 //
@@ -42,7 +48,7 @@
 //	void Free();
 //
 //	//Renders Texture at given Point
-//	void render(int x, int y, SDL_Rect*  clip = NULL , double angle = 0.0 , SDL_Point* center = NULL , SDL_RendererFlip flip  = SDL_FLIP_NONE);
+//	void render(int x, int y, SDL_Rect*  clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
 //
 //	//Get image dimensions
 //	int getWidth();
@@ -53,13 +59,10 @@
 ////variables 
 //SDL_Window* gWindow = NULL;
 //SDL_Renderer* gRenderer = NULL;
-//
-//
-////walking information
-//
-//
-//LTexture gArrowTexture;
-//
+//TTF_Font *gFont = NULL;
+////rendered texture 
+//LTexture gTimeTextTexture;
+//LTexture gPromptTextTexture;
 //
 //
 ////functions
@@ -100,6 +103,39 @@
 //{
 //	SDL_SetTextureAlphaMod(mTexture, alpha);
 //}
+//
+//
+//bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor)
+//{
+//	//get rid of preexisting texture 
+//	Free();
+//
+//	//render texture surface 
+//	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
+//	if (textSurface == NULL)
+//	{
+//		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
+//	}
+//	else
+//	{
+//		//create texture from surface pixels 
+//		mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
+//		if (mTexture == NULL)
+//		{
+//			printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
+//		}
+//		else
+//		{
+//			//get image dimensions
+//			mWidth = textSurface->w;
+//			mHeight = textSurface->h;
+//		}
+//		//get rid of old surface 
+//		SDL_FreeSurface(textSurface);
+//	}
+//	return mTexture != NULL;
+//}
+//
 //
 //void LTexture::Free()
 //{
@@ -151,7 +187,7 @@
 //
 //
 //}
-//void LTexture::render(int x, int y, SDL_Rect* clip ,double angle , SDL_Point* center, SDL_RendererFlip flip )
+//void LTexture::render(int x, int y, SDL_Rect* clip, double angle, SDL_Point* center, SDL_RendererFlip flip)
 //{
 //	//set rendering space and render to screen 
 //	SDL_Rect renderQuad = { x , y ,mWidth,mHeight };
@@ -220,6 +256,14 @@
 //					printf("SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError());
 //					success = false;
 //				}
+//
+//				//Initialize SDL TTF 
+//				if (TTF_Init() == -1)
+//				{
+//					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+//					success = false;
+//				}
+//
 //			}
 //		}
 //	}
@@ -230,27 +274,43 @@
 //void Close()
 //{
 //	//Free loaded IMages 
-//	gArrowTexture.Free();
+//	gTimeTextTexture.Free();
 //	//Destroy Window
 //	SDL_DestroyWindow(gWindow);
 //	gWindow = NULL;
 //	//Destroy Renderer
 //	SDL_DestroyRenderer(gRenderer);
 //	gRenderer = NULL;
+//	//Destroy Font
+//	TTF_CloseFont(gFont);
+//	gFont = NULL;
+//
 //	//Quit SubSystems
 //	IMG_Quit();
 //	SDL_Quit();
+//	TTF_Quit();
 //}
 //bool loadMedia()
 //{
 //	bool success = true;
-//	//load front alpha texture 
-//	if (!gArrowTexture.loadFromFile("C://Users/Admin/Documents/SDL/CppTesting/SDLSet/Images/arrow.png"))
+//	//load front Font 
+//	gFont = TTF_OpenFont("C://Users/Admin/Documents/SDL/CppTesting/SDLSet/Images/lazy.ttf", 28);
+//	if (gFont == NULL)
 //	{
-//		printf("Failed to load Arrow' texture image!\n");
+//		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
 //		success = false;
 //	}
-//	
+//	else
+//	{
+//		//render text set text color as black 
+//		SDL_Color textColor = { 0,0,0,255};
+//		if (!gPromptTextTexture.loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor))
+//		{
+//			printf("Failed to render text texture!\n");
+//			success = false;
+//		}
+//	}
+//
 //	return success;
 //}
 //
@@ -271,11 +331,14 @@
 //		{
 //			bool quit = false;
 //			SDL_Event e;
+//			
+//			//text color 
+//			SDL_Color textColor = { 0,0,0,255 };
+//			//Current time start time
+//			Uint32 startTime = 0;
+//			//In memory textStream
+//			std::stringstream timtetext;
 //
-//			//Current Degrees
-//			double  degrees  = 0;
-//			//Flip Type 
-//			SDL_RendererFlip fliptype = SDL_FLIP_NONE;
 //
 //
 //			while (!quit)
@@ -286,40 +349,35 @@
 //					{
 //						quit = true;
 //					}
-//					else if (e.type == SDL_KEYDOWN)
+//					//Reset start time on return keypress
+//
+//					else if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_RETURN )
 //					{
-//						switch (e.key.keysym.sym)
-//						{
-//						case SDLK_a:
-//							degrees -= 60;
-//							break;
-//						case SDLK_d:
-//							degrees += 60;
-//							break;
-//						case SDLK_q:
-//							fliptype = SDL_FLIP_HORIZONTAL;
-//							break;
-//						case SDLK_w:
-//							fliptype = SDL_FLIP_NONE;
-//							break;
-//						case SDLK_e:
-//							fliptype = SDL_FLIP_VERTICAL;
-//							break;
-//						default:
-//							break;
-//						}
+//						startTime = SDL_GetTicks();
 //					}
 //
 //
 //
 //				}
+//				//set text to be rendered
+//				timtetext.str("");
+//				timtetext << "Miliseconds since start time " << SDL_GetTicks() - startTime;
+//
+//
+//				//render text 
+//				if (!gTimeTextTexture.loadFromRenderedText(timtetext.str().c_str() ,textColor))
+//				{
+//					printf("Unable to render time texture!\n");
+//				}
+//
 //				//Clear screen
 //				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 //				SDL_RenderClear(gRenderer);
 //
 //				//render current  frame 
-//				gArrowTexture.render((SCREEN_WIDTH - gArrowTexture.getWidth()) / 2, (SCREEN_HEIGHT - gArrowTexture.getHeight()) / 2, NULL, degrees, NULL, fliptype);
-//				
+//				gPromptTextTexture.render((SCREEN_WIDTH - gPromptTextTexture.getWidth()) / 2, 0);
+//
+//				gTimeTextTexture.render((SCREEN_WIDTH - gTimeTextTexture.getWidth()) / 2, (SCREEN_HEIGHT - gTimeTextTexture.getHeight()) / 2);
 //
 //				//update screen 
 //				SDL_RenderPresent(gRenderer);

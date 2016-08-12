@@ -69,18 +69,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_ttf-2.0.14\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_ttf-2.0.14\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectPath)/Images;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -132,6 +133,9 @@
     <ClCompile Include="Exercise13.cpp" />
     <ClCompile Include="Exercise14.cpp" />
     <ClCompile Include="Exercise15.cpp" />
+    <ClCompile Include="Exercise16.cpp" />
+    <ClCompile Include="Exercise22.cpp" />
+    <ClCompile Include="Exercise23.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
