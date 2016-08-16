@@ -7,7 +7,7 @@
 //#include <sstream>
 //
 ////constatnts
-//const int SCREEN_WIDTH = 640;	
+//const int SCREEN_WIDTH = 640;
 //const int SCREEN_HEIGHT = 480;
 //
 //
@@ -29,7 +29,7 @@
 //	~LTexture();
 //
 //	//Function of exercise 16 create image from font string
-//	bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
+//	//bool loadFromRenderedText(std::string textureText, SDL_Color textColor);
 //
 //	//load image at specific path
 //	bool loadFromFile(std::string path);
@@ -55,7 +55,7 @@
 //	int getHeight();
 //
 //};
-//class LTimer 
+//class LTimer
 //{
 //private:
 //	//The Clock time when the timer started
@@ -69,23 +69,41 @@
 //	bool mStarted;
 //
 //public:
-//	LTimer();
-//	void Start();
-//	void Pause();
-//	void unPause();
-//	void Stop();
-//	Uint32 getTicks();
-//	bool isStarted();
-//	bool isPaused();
+//};
+//
+//
+//class Dot
+//{
+//private:
+//	int mPosX, mPosY;
+//	int mVelx, mVely;
+//	SDL_Rect mCollider;
+//
+//public:
+//	//dimensions of the dot 
+//	static const int DOT_WIDTH = 20;
+//	static const int DOT_HEIGHT = 20;
+//	static const int DOT_VEL = 10;
+//
+//	//initializes the dot 
+//	Dot();
+//	void handleEvent(SDL_Event& e);
+//	void move(SDL_Rect& wall);
+//	void render();
 //
 //};
+//
+////Dot functions 
+//
+//
+//
+//
+//
 ////variables 
 //SDL_Window* gWindow = NULL;
 //SDL_Renderer* gRenderer = NULL;
-//TTF_Font *gFont = NULL;
 ////rendered texture 
-//LTexture gTimeTextTexture;
-//LTexture gPromptTextTexture;
+//LTexture gDotTexture;
 //
 //
 ////functions
@@ -93,6 +111,78 @@
 //bool Init();
 //bool loadMedia();
 //void Close();
+//bool checkCollision(SDL_Rect a, SDL_Rect b);
+//
+//Dot::Dot()
+//{
+//	mPosX = 0;
+//	mPosY = 0;
+//	//velocity
+//	mVelx = 0;
+//	mVely = 0;
+//	//set collision box dimensions
+//	mCollider.h = DOT_HEIGHT;
+//	mCollider.w = DOT_WIDTH;
+//
+//};
+//
+//void Dot::handleEvent(SDL_Event& e)
+//{
+//	if (e.type == SDL_KEYDOWN && e.key.repeat == 0)
+//	{
+//		//Adjust Vel
+//		switch (e.key.keysym.sym)
+//		{
+//		case SDLK_UP: mVely -= DOT_VEL; break;
+//		case SDLK_DOWN: mVely += DOT_VEL; break;
+//		case SDLK_RIGHT: mVelx += DOT_VEL; break;
+//		case SDLK_LEFT: mVelx -= DOT_VEL; break;
+//
+//		default:
+//			break;
+//		}
+//	}
+//	else if (e.type == SDL_KEYUP && e.key.repeat == 0)
+//	{
+//		//Adjust the velocity
+//		switch (e.key.keysym.sym)
+//		{
+//		case SDLK_UP: mVely += DOT_VEL; break;
+//		case SDLK_DOWN: mVely -= DOT_VEL; break;
+//		case SDLK_LEFT: mVelx += DOT_VEL; break;
+//		case SDLK_RIGHT: mVelx -= DOT_VEL; break;
+//		}
+//	}
+//}
+//
+//void Dot::move(SDL_Rect& wall)
+//{
+//	mPosX += mVelx;
+//	mCollider.x = mPosX;
+//	if ((mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) || checkCollision(mCollider , wall))
+//	{
+//		//move back 
+//		mPosX -= mVelx;
+//		mCollider.x = mPosX;
+//	}
+//	//the same for going u and going down
+//	mPosY += mVely;
+//	mCollider.y = mPosY;
+//	if ((mPosY <  0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) || checkCollision(mCollider , wall))
+//	{
+//		mPosY -= mVely;
+//		mCollider.y = mPosY;
+//			;
+//	}
+//}
+//
+//void Dot::render()
+//{
+//	gDotTexture.render(mPosX, mPosY);
+//}
+//
+//
+//
 //
 //
 //
@@ -128,36 +218,6 @@
 //}
 //
 //
-//bool LTexture::loadFromRenderedText(std::string textureText, SDL_Color textColor)
-//{
-//	//get rid of preexisting texture 
-//	Free();
-//
-//	//render texture surface 
-//	SDL_Surface* textSurface = TTF_RenderText_Solid(gFont, textureText.c_str(), textColor);
-//	if (textSurface == NULL)
-//	{
-//		printf("Unable to render text surface! SDL_ttf Error: %s\n", TTF_GetError());
-//	}
-//	else
-//	{
-//		//create texture from surface pixels 
-//		mTexture = SDL_CreateTextureFromSurface(gRenderer, textSurface);
-//		if (mTexture == NULL)
-//		{
-//			printf("Unable to create texture from rendered text! SDL Error: %s\n", SDL_GetError());
-//		}
-//		else
-//		{
-//			//get image dimensions
-//			mWidth = textSurface->w;
-//			mHeight = textSurface->h;
-//		}
-//		//get rid of old surface 
-//		SDL_FreeSurface(textSurface);
-//	}
-//	return mTexture != NULL;
-//}
 //
 //
 //void LTexture::Free()
@@ -231,82 +291,50 @@
 //	return mWidth;
 //}
 //
-////Ltimer methods 
-//
-//LTimer::LTimer() 
-//{
-//	//init variables 
-//	mPausedTicks = 0;
-//	mStartTicks = 0;
-//	mPaused = false;
-//	mStarted = false;
-//}
-//void LTimer::Start() 
-//{
-//	//start the timer 
-//	mStarted = true;
-//	mPaused = false;
-//
-//	mStartTicks = SDL_GetTicks();
-//	mPausedTicks = 0;
-//}
-//void LTimer::Stop() 
-//{
-//	mStarted = false;
-//	mPaused = false;
-//	//clear ticks variables 
-//	mStartTicks = 0;
-//	mPausedTicks = 0;
-//}
-//void LTimer::Pause() 
-//{
-//	if (mStarted && !mPaused)
-//	{
-//		//pause the timer 
-//		mPaused = true;
-//		mPausedTicks = SDL_GetTicks() - mStartTicks;
-//		mStartTicks = 0;
-//	}
-//}
-//void LTimer::unPause() 
-//{
-//	if (mStarted && mPaused)
-//	{
-//		mPaused = false;
-//		mStartTicks = SDL_GetTicks() - mPausedTicks;
-//		mPausedTicks = 0;
-//	}
-//}
-//Uint32	LTimer::getTicks() 
-//{
-//	//the actual time 
-//	Uint32 time = 0;
-//	if (mStarted)
-//	{
-//		if (mPaused)
-//		{
-//			//return the number of ticks when the timer was paused 
-//			time = mPausedTicks;
-//		}
-//		else 
-//		{
-//			time = SDL_GetTicks() - mStartTicks;
-//		}
-//	}
-//	return time; 
-//}
-//bool LTimer::isStarted() 
-//{
-//	return mStarted;
-//}
-//bool LTimer::isPaused()
-//{
-//	return mPaused;
-//}
-//
-//
 //
 ////Program Functions
+//
+//bool checkCollision(SDL_Rect a, SDL_Rect b) 
+//{
+//	bool sucess = true;
+//	int	leftA,rightA, topA, bottomA , rightB , topB , bottomB , leftB;
+//	//calculates the side of rect A 
+//	leftA = a.x;
+//	rightA = a.x + a.w;
+//	topA = a.y;
+//	bottomA = a.y + a.h;
+//
+//	//calculates the side of rect b 
+//	leftB = b.x;
+//	rightB = b.x + b.w;
+//	topB = b.y;
+//	bottomB = b.y + b.h;
+//
+//	// if any of the sides from A are outside of B 
+//	if (bottomA <= topB)
+//	{
+//		return false; 
+//	}
+//	else if (topA >= bottomB) 
+//	{
+//		return false;
+//	}
+//	else if (rightA <= leftB)
+//	{
+//		return false;
+//	}
+//	else if (leftA >= rightB) 
+//	{
+//		return false;
+//	}
+//
+//
+//	return sucess;
+//
+//
+//}
+//
+//
 //
 //
 //bool Init()
@@ -354,12 +382,6 @@
 //					success = false;
 //				}
 //
-//				//Initialize SDL TTF 
-//				if (TTF_Init() == -1)
-//				{
-//					printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
-//					success = false;
-//				}
 //
 //			}
 //		}
@@ -371,41 +393,27 @@
 //void Close()
 //{
 //	//Free loaded IMages 
-//	gTimeTextTexture.Free();
+//	gDotTexture.Free();
 //	//Destroy Window
 //	SDL_DestroyWindow(gWindow);
 //	gWindow = NULL;
 //	//Destroy Renderer
 //	SDL_DestroyRenderer(gRenderer);
 //	gRenderer = NULL;
-//	//Destroy Font
-//	TTF_CloseFont(gFont);
-//	gFont = NULL;
+//
 //
 //	//Quit SubSystems
 //	IMG_Quit();
 //	SDL_Quit();
-//	TTF_Quit();
 //}
 //bool loadMedia()
 //{
 //	bool success = true;
-//	//load front Font   C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\Images
-//	gFont = TTF_OpenFont("C://Users/Yeis/Documents/SDL_Exercises/CppTesting/SDLSet/Images/lazy.ttf", 28);
-//	if (gFont == NULL)
+//	//load front Font  "C://Users/Admin/Documents/SDL/CppTesting/SDLSet/Images/dot.bmp"
+//	if (!gDotTexture.loadFromFile("C://Users/Yeis/Documents/SDL_Exercises/CppTesting/SDLSet/Images/dot.bmp"))
 //	{
-//		printf("Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError());
+//		printf("Failed to load dot texture!\n");
 //		success = false;
-//	}
-//	else
-//	{
-//		//render text set text color as black 
-//		SDL_Color textColor = { 0,0,0,255 };
-//		if (!gPromptTextTexture.loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor))
-//		{
-//			printf("Failed to render text texture!\n");
-//			success = false;
-//		}
 //	}
 //
 //	return success;
@@ -428,13 +436,13 @@
 //		{
 //			bool quit = false;
 //			SDL_Event e;
-//
-//			//text color 
-//			SDL_Color textColor = { 0,0,0,255 };
-//			//Current time start time
-//			LTimer timer;
-//			//In memory textStream
-//			std::stringstream timtetext;
+//			Dot dot;
+//			//set wall
+//			SDL_Rect wall;
+//			wall.x = 300;
+//			wall.y = 40;
+//			wall.w = 40;
+//			wall.h = 400; 
 //
 //
 //
@@ -446,57 +454,22 @@
 //					{
 //						quit = true;
 //					}
-//					//Reset start time on return keypress
-//
-//					else if (e.type == SDL_KEYDOWN )
-//					{
-//						if (e.key.keysym.sym == SDLK_s)
-//						{
-//							if (timer.isStarted())
-//							{
-//								timer.Stop();
-//							}
-//							else
-//							{
-//								timer.Start();
-//							}
-//						}
-//						else if (e.key.keysym.sym == SDLK_p) 
-//						{
-//							if (timer.isPaused())
-//							{
-//								timer.unPause();
-//							}
-//							else 
-//							{
-//								timer.Pause();
-//							}
-//						}
-//					}
-//
-//
-//
+//					//handle event of the dot 
+//					dot.handleEvent(e);
 //				}
-//				//set text to be rendered
-//				timtetext.str("");
-//				timtetext << "Seconds since start time " << (timer.getTicks() / 1000.f);
+//				//move dot 
+//				dot.move(wall);
 //
-//
-//				//render text 
-//				if (!gTimeTextTexture.loadFromRenderedText(timtetext.str().c_str(), textColor))
-//				{
-//					printf("Unable to render time texture!\n");
-//				}
-//
-//				//Clear screen
+//				//clear screen 
 //				SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 //				SDL_RenderClear(gRenderer);
 //
-//				//render current  frame 
-//				gPromptTextTexture.render((SCREEN_WIDTH - gPromptTextTexture.getWidth()) / 2, 0);
+//				//render the wall 
+//				SDL_SetRenderDrawColor(gRenderer, 0x00, 0x00, 0x00, 0xFF);
+//				SDL_RenderDrawRect(gRenderer, &wall);
 //
-//				gTimeTextTexture.render((SCREEN_WIDTH - gTimeTextTexture.getWidth()) / 2, (SCREEN_HEIGHT - gTimeTextTexture.getHeight()) / 2);
-//
+//				//Render Objects
+//				dot.render();
 //				//update screen 
 //				SDL_RenderPresent(gRenderer);
 //			}

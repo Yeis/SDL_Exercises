@@ -69,8 +69,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_ttf-2.0.14\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\include;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_ttf-2.0.14\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL2_image-2.0.1\lib\x86;C:\Users\Admin\Documents\SDL\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\include;C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL2_image-devel-2.0.1-VC\SDL2_image-2.0.1\include;C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL2_image-devel-2.0.1-VC\SDL2_image-2.0.1\lib\x86;C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL2_ttf-devel-2.0.14-VC\SDL2_ttf-2.0.14\lib\x86;C:\Users\Yeis\Documents\SDL_Exercises\CppTesting\SDLSet\SDL_VS\sdl-visualstudio-2730\SDL\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -80,7 +80,7 @@
       <AdditionalIncludeDirectories>$(ProjectPath)/Images;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>C:\Users\Admin\Documents\Visual Studio 2015\Projects\CppTesting\SDLSet\SDL_VS\SDL\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
     </Link>
@@ -136,6 +136,9 @@
     <ClCompile Include="Exercise16.cpp" />
     <ClCompile Include="Exercise22.cpp" />
     <ClCompile Include="Exercise23.cpp" />
+    <ClCompile Include="Exercise24.cpp" />
+    <ClCompile Include="Exercise26.cpp" />
+    <ClCompile Include="Exercises27.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
