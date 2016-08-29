@@ -40,7 +40,7 @@
 //bool Init() 
 //{
 //	bool success = true;
-//	gWindow = SDL_CreateWindow("Execise07", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+// DL_CreateWindow("Execise07", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 //	if (gWindow == NULL)
 //	{
 //		printf("Could not create the window! %s \n", SDL_GetError());
