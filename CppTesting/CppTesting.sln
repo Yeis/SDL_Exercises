@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SDLSet", "SDLSet\SDLSet.vcxproj", "{E3B5DFA9-4F37-4133-957A-9B53168F0C0F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenGLExercises", "Project1\Project1.vcxproj", "{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM = Debug|ARM
@@ -25,6 +27,16 @@ Global
 		{E3B5DFA9-4F37-4133-957A-9B53168F0C0F}.Release|x64.Build.0 = Release|x64
 		{E3B5DFA9-4F37-4133-957A-9B53168F0C0F}.Release|x86.ActiveCfg = Release|Win32
 		{E3B5DFA9-4F37-4133-957A-9B53168F0C0F}.Release|x86.Build.0 = Release|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Debug|ARM.ActiveCfg = Debug|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Debug|x64.ActiveCfg = Debug|x64
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Debug|x64.Build.0 = Debug|x64
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Debug|x86.ActiveCfg = Debug|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Debug|x86.Build.0 = Debug|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Release|ARM.ActiveCfg = Release|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Release|x64.ActiveCfg = Release|x64
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Release|x64.Build.0 = Release|x64
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Release|x86.ActiveCfg = Release|Win32
+		{C6E154CD-9E83-491E-88AA-86CAEDC2DB7C}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
